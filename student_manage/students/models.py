@@ -4,10 +4,10 @@ class Student(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     course = models.CharField(max_length=50, choices=[
-        ('BS-CS', 'Computer Science'),
-        ('BS-DS', 'Data Science'),
-        ('BS-IT', 'Information Technology'),
-        ('BS-IS', 'Information Systems')
+        ('BS-CS', 'BS-CS'),
+        ('BS-DS', 'BS-DS'),
+        ('BS-IT', 'BS-IT'),
+        ('BS-IS', 'BS-IS')
     ])
     gender = models.CharField(max_length=6, choices=[
         ('Male', 'Male'),

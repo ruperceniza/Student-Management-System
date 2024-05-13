@@ -10,6 +10,10 @@
     <div class="container mx-auto px-4">
         <header class="py-6">
             <h1 class="text-3xl font-bold text-center">Student Management System</h1>
+            <nav class="text-center">
+                <a href="{% url 'add_student' %}" class="text-blue-500 hover:text-blue-800">Add Student</a> |
+                <a href="{% url 'student_list' %}" class="text-blue-500 hover:text-blue-800">Student List</a>
+            </nav>
         </header>
         {% block content %}{% endblock %}
         <footer class="py-4 text-center mt-10">
