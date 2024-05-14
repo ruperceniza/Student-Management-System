@@ -1,7 +1,7 @@
 {% extends 'students/base.html' %}
 
 {% block content %}
-<div class="max-w-xl mx-auto bg-white p-8 border border-gray-300 rounded-lg mt-10">
+<div class="max-w-xl mx-auto bg-white p-8 border border-blue-300 rounded-lg mt-10 font-poppins">
     <form action="{% url 'edit_student' student.id %}" method="POST">
         {% csrf_token %}
         <div class="grid grid-cols-1 gap-6">
@@ -14,4 +14,5 @@
         </div>
     </form>
 </div>
+
 {% endblock %}
