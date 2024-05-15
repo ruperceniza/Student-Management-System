@@ -3,6 +3,8 @@ from .models import Student
 from .forms import StudentForm
 from .forms import FilterForm
 from django.urls import reverse
+from django.views.decorators.http import require_POST
+from django.http import HttpResponseNotAllowed
 
 def student_list(request):
     if request.method == 'GET':
@@ -43,10 +45,12 @@ def add_student(request):
     return render(request, 'students/add_student.html', {'form': form})
 
 def delete_student(request, student_id):
-    student = Student.objects.get(id=student_id)
+    if request.method != 'POST':
+        return HttpResponseNotAllowed(['POST'])
+
+    student = get_object_or_404(Student, id=student_id)
     student.delete()
     return redirect('/')
-
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Student
