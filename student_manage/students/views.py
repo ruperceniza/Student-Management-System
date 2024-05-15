@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Student
 from .forms import StudentForm
 from .forms import FilterForm
+from django.urls import reverse
 
 def student_list(request):
     if request.method == 'GET':
@@ -51,15 +52,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Student
 from .forms import StudentForm
 
-def edit_student(request, student_id):
-    student = get_object_or_404(Student, id=student_id)
+def update_student(request, student_id):
     if request.method == 'POST':
-        form = StudentForm(request.POST, instance=student)
-        if form.is_valid():
-            form.save()
-            return redirect('/')
-    else:
-        form = StudentForm(instance=student)
-    return render(request, 'students/edit_student.html', {'form': form, 'student': student})
-
-
+        student = get_object_or_404(Student, id=student_id)
+        student.first_name = request.POST.get('full_name', '').split(' ')[0]
+        student.last_name = request.POST.get('full_name', '').split(' ')[1] if len(request.POST.get('full_name', '').split(' ')) > 1 else ''
+        student.course = request.POST.get('course', '')
+        student.gender = request.POST.get('gender', '')
+        student.age = request.POST.get('age', 0)
+        student.save()
+        return redirect(reverse('student_list'))
+    return redirect(reverse('student_list'))
